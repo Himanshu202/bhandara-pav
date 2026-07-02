@@ -76,14 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BhandaraSetu — Book Your Bhandara in Minutes" },
+      { title: "Bhandara Booking & Management | Book Your Bhandara Online" },
       {
         name: "description",
         content:
           "India's modern platform to book and manage Bhandaras, community feasts, and religious events. Online + offline management, transparent pricing, real-time tracking.",
       },
       { name: "author", content: "BhandaraSetu" },
-      { property: "og:title", content: "BhandaraSetu — Book Your Bhandara in Minutes" },
+      { property: "og:title", content: "Bhandara Booking & Management | Book Your Bhandara Online" },
       {
         property: "og:description",
         content:
@@ -91,6 +91,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Bhandara Booking & Management | Book Your Bhandara Online" },
+      { name: "description", content: "Book and manage Bhandara events online. Find venues, schedule dates, manage guests, track bookings and make secure online or offline payments across India." },
+      { property: "og:description", content: "Book and manage Bhandara events online. Find venues, schedule dates, manage guests, track bookings and make secure online or offline payments across India." },
+      { name: "twitter:description", content: "Book and manage Bhandara events online. Find venues, schedule dates, manage guests, track bookings and make secure online or offline payments across India." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ikinft1tB3fqnI3zxaKF1tsFlj22/social-images/social-1783017563614-ChatGPT_Image_Jul_2,_2026,_11_42_04_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ikinft1tB3fqnI3zxaKF1tsFlj22/social-images/social-1783017563614-ChatGPT_Image_Jul_2,_2026,_11_42_04_PM.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
