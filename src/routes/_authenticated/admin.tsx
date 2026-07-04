@@ -141,11 +141,19 @@ function AdminDashboard() {
     a.download = `${name}.csv`;
     a.click();
   };
+  const escapeHtml = (v: unknown) =>
+    String(v ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   const exportPDF = (title: string, rows: Record<string, unknown>[]) => {
     const w = window.open("", "_blank");
     if (!w) return;
     const cols = rows[0] ? Object.keys(rows[0]) : [];
-    w.document.write(`<title>${title}</title><style>body{font-family:system-ui;padding:24px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:left}h1{color:#F97316}</style><h1>${title}</h1><table><thead><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${cols.map((c) => `<td>${String(r[c] ?? "")}</td>`).join("")}</tr>`).join("")}</tbody></table><script>window.print()</script>`);
+    const safeTitle = escapeHtml(title);
+    w.document.write(`<title>${safeTitle}</title><style>body{font-family:system-ui;padding:24px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ddd;padding:6px;text-align:left}h1{color:#F97316}</style><h1>${safeTitle}</h1><table><thead><tr>${cols.map((c) => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${cols.map((c) => `<td>${escapeHtml(r[c])}</td>`).join("")}</tr>`).join("")}</tbody></table><script>window.print()</script>`);
     w.document.close();
   };
 
