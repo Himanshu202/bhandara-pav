@@ -65,22 +65,31 @@ function UserDashboard() {
     else toast.success("Profile updated");
   };
 
+  const escapeHtml = (v: unknown) =>
+    String(v ?? "—")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
   const downloadInvoice = (b: Booking) => {
-    const html = `<!doctype html><meta charset="utf-8"><title>Invoice ${b.booking_id}</title>
+    const html = `<!doctype html><meta charset="utf-8"><title>Invoice ${escapeHtml(b.booking_id)}</title>
 <style>body{font-family:system-ui;max-width:640px;margin:40px auto;padding:24px;border:1px solid #eee}h1{color:#F97316}</style>
 <h1>BhandaraSetu Invoice</h1>
-<p><b>Booking:</b> ${b.booking_id}</p>
-<p><b>Event:</b> ${b.event_name}</p>
-<p><b>Date:</b> ${b.event_date ?? "—"}</p>
-<p><b>Guests:</b> ${b.guests ?? "—"}</p>
-<p><b>Amount:</b> ₹${b.amount ?? 0}</p>
-<p><b>Payment:</b> ${b.payment_status}</p>`;
+<p><b>Booking:</b> ${escapeHtml(b.booking_id)}</p>
+<p><b>Event:</b> ${escapeHtml(b.event_name)}</p>
+<p><b>Date:</b> ${escapeHtml(b.event_date)}</p>
+<p><b>Guests:</b> ${escapeHtml(b.guests)}</p>
+<p><b>Amount:</b> ₹${escapeHtml(b.amount ?? 0)}</p>
+<p><b>Payment:</b> ${escapeHtml(b.payment_status)}</p>`;
     const blob = new Blob([html], { type: "text/html" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = `invoice-${b.booking_id}.html`;
     a.click();
   };
+
 
   return (
     <PageShell>
